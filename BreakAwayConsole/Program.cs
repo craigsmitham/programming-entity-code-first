@@ -115,8 +115,12 @@ namespace BreakAwayConsole
         {
             using (var context = new BreakAwayContext())
             {
-                var person = context.People.FirstOrDefault();
+                var person = context.People.Include("Photo").FirstOrDefault();
                 person.FirstName = "Rowena";
+                if (person.Photo == null)
+                {
+                    person.Photo = new PersonPhoto { Photo = new Byte[] { 0 } };
+                }
                 context.SaveChanges();
             }
         }
@@ -129,7 +133,8 @@ namespace BreakAwayConsole
             {
                 FirstName = "Rowan",
                 LastName = "Miller",
-                SocialSecurityNumber = 12345678
+                SocialSecurityNumber = 12345678,
+                Photo = new PersonPhoto { Photo = new Byte[] { 0 } }
             };
             using (var context = new BreakAwayContext())
             {

@@ -34,11 +34,12 @@ namespace DataAccess
                 .HasForeignKey(s => s.AccomodationId);
 
             modelBuilder.Entity<PersonPhoto>()
+                .HasKey(p => p.PersonId);
+
+            modelBuilder.Entity<PersonPhoto>()
                 .HasRequired(p => p.PhotoOf)
-                .WithOptional(p => p.Photo);
+                .WithRequiredDependent(p => p.Photo);
 
         }
-
-
     }
 }

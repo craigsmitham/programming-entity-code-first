@@ -10,6 +10,7 @@ namespace DataAccess
         {
             Property(p => p.RowVersion).IsRowVersion();
             Property(p => p.SocialSecurityNumber).IsConcurrencyToken();
+            
         }
 
     }
