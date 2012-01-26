@@ -21,6 +21,7 @@ namespace DataAccess
             modelBuilder.Configurations.Add(new LodgingConfiguration());
             modelBuilder.Configurations.Add(new TripConfiguration());
             modelBuilder.Configurations.Add(new PersonConfiguration());
+            modelBuilder.Configurations.Add(new PersonPhotoConfiguration());
 
             // Add Complex type configuration classes
             modelBuilder.Configurations.Add(new AddressConfiguration());
@@ -33,12 +34,6 @@ namespace DataAccess
                 .WithMany(l => l.InternetSpecials)
                 .HasForeignKey(s => s.AccomodationId);
 
-            modelBuilder.Entity<PersonPhoto>()
-                .HasKey(p => p.PersonId);
-
-            modelBuilder.Entity<PersonPhoto>()
-                .HasRequired(p => p.PhotoOf)
-                .WithRequiredDependent(p => p.Photo);
 
         }
     }

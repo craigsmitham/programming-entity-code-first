@@ -8,6 +8,8 @@ namespace DataAccess
     {
         public PersonConfiguration()
         {
+            ToTable("People");
+
             Property(p => p.RowVersion).IsRowVersion();
             Property(p => p.SocialSecurityNumber).IsConcurrencyToken();
             

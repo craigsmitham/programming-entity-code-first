@@ -48,6 +48,7 @@
     <Compile Include="ActivityConfiguration.cs" />
     <Compile Include="AddressConfiguration.cs" />
     <Compile Include="BreakAwayContext.cs" />
+    <Compile Include="PersonPhotoConfiguration.cs" />
     <Compile Include="DestinationConfiguration.cs" />
     <Compile Include="LodgingConfiguration.cs" />
     <Compile Include="PersonalInfoConfiguration.cs" />

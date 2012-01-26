@@ -7,7 +7,10 @@ namespace DataAccess
     {
         public AddressConfiguration()
         {
-            Property(a => a.StreetAddress).HasMaxLength(150);
+            Property(a => a.StreetAddress)
+                .HasMaxLength(150)
+                .HasColumnName("StreetAddress");
+            
         }
     }
 }
