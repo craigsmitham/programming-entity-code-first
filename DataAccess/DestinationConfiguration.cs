@@ -21,18 +21,9 @@ namespace DataAccess
 
             // Relationships
 
-            //ToTable("Locations", "baga");
-            Map(m =>
-                {
-                    m.Properties(d => new { d.Name, d.Country, d.Description });
-                    m.ToTable("Locations");
-                });
-            Map(m =>
-                {
-                    m.Properties(d => new { d.Photo });
-                    m.ToTable("LocationPhotos");
-                });
 
+            // Custom table configuration
+            ToTable("Locations", "baga");
         }
     }
 }
