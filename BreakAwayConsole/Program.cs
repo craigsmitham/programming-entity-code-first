@@ -1,0 +1,172 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Model;
+using DataAccess;
+using System.Data.Entity;
+
+namespace BreakAwayConsole
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Database.SetInitializer(
+                new DropCreateDatabaseIfModelChanges<BreakAwayContext>());
+            InsertDestination();
+            InsertTrip();
+            InsertPerson();
+            UpdateTrip();
+            UpdatePerson();
+            ShowPerson();
+            // DeleteDestinationInMemoryAndDbCascade();
+            InsertActivities();
+            QueryTripWithActivities();
+            Console.ReadKey();
+        }
+
+   
+
+        private static void InsertActivities()
+        {
+            using (var context = new BreakAwayContext())
+            {
+                var trip = context.Trips.FirstOrDefault();
+                trip.Activities = new List<Activity>
+                {
+                    new Activity { Name = "Bicycle Touring" },
+                    new Activity { Name = "Horse Riding" }
+                };
+                context.SaveChanges();
+            }
+        }
+
+        private static void QueryTripWithActivities()
+        {
+            using (var context = new BreakAwayContext())
+            {
+                var tripWithActivities = context.Trips
+                    .Include("Activities").FirstOrDefault();
+            }
+        }
+
+        private static void DeleteDestinationInMemoryAndDbCascade()
+        {
+            int destinationId;
+            using (var context = new BreakAwayContext())
+            {
+                var destination = new Destination
+                {
+                    Name = "Sample Destination",
+                    Lodgings = new List<Lodging>
+                    {
+                        new Lodging { Name = "Lodging One" },
+                        new Lodging { Name = "Lodging Two" }
+                    }
+                };
+
+                context.Destinations.Add(destination);
+                context.SaveChanges();
+                destinationId = destination.DestinationId;
+            }
+
+            using (var context = new BreakAwayContext())
+            {
+                var destination = context.Destinations
+                    .Single(d => d.DestinationId == destinationId);
+
+                context.Destinations.Remove(destination);
+                context.SaveChanges();
+            }
+
+            using (var context = new BreakAwayContext())
+            {
+                var lodgings = context.Lodgings
+                    .Where(l => l.DestinationId == destinationId).ToList();
+
+                Console.WriteLine("Lodgings: {0}", lodgings.Count);
+            }
+        }
+
+        private static void ShowPerson()
+        {
+            using (var context = new BreakAwayContext())
+            {
+                var person = context.People.FirstOrDefault();
+
+                Console.WriteLine("First Name: " + person.FirstName);
+                Console.WriteLine("Last Name: " + person.LastName);
+                Console.WriteLine("Full Name: " + person.FullName);
+            }
+        }
+
+        private static void UpdateTrip()
+        {
+            using (var context = new BreakAwayContext())
+            {
+                var trip = context.Trips.FirstOrDefault();
+                trip.CostUSD = 750;
+                context.SaveChanges();
+            }
+        }
+
+        private static void UpdatePerson()
+        {
+            using (var context = new BreakAwayContext())
+            {
+                var person = context.People.FirstOrDefault();
+                person.FirstName = "Rowena";
+                context.SaveChanges();
+            }
+        }
+
+
+
+        private static void InsertPerson()
+        {
+            var person = new Person
+            {
+                FirstName = "Rowan",
+                LastName = "Miller",
+                SocialSecurityNumber = 12345678
+            };
+            using (var context = new BreakAwayContext())
+            {
+                context.People.Add(person);
+                context.SaveChanges();
+            }
+        }
+
+        private static void InsertTrip()
+        {
+            var trip = new Trip
+            {
+                CostUSD = 800,
+                StartDate = new DateTime(2011, 9, 1),
+                EndDate = new DateTime(2011, 9, 14)
+            };
+
+            using (var context = new BreakAwayContext())
+            {
+                context.Trips.Add(trip);
+                context.SaveChanges();
+            }
+        }
+
+        private static void InsertDestination()
+        {
+            var destination = new Destination
+            {
+                Country = "Indonesia",
+                Description = "EcoTourism at its best in exquisit Bali",
+                Name = "Bali"
+            };
+            using (var context = new BreakAwayContext())
+            {
+                context.Destinations.Add(destination);
+                context.SaveChanges();
+            }
+        }
+    }
+}
