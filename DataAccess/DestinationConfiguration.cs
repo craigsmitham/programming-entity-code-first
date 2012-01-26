@@ -12,9 +12,13 @@ namespace DataAccess
             Property(d => d.Description).HasMaxLength(500);
             Property(d => d.Photo).HasColumnType("image");
 
+
+
             // Relationships
-            //HasMany(d => d.Lodgings)
-            //    .WithRequired(l => l.Destination);
+            HasMany(d => d.Lodgings)
+                .WithRequired()
+                .HasForeignKey(l => l.LocationId);
+
         }
     }
 }
