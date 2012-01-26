@@ -7,8 +7,7 @@ namespace DataAccess
     {
         public DestinationConfiguration()
         {
-            ToTable("Locations", "baga");
-
+            
             // Properties
             Property(d => d.DestinationId)
                 .HasColumnName("LocationID");
@@ -22,6 +21,17 @@ namespace DataAccess
 
             // Relationships
 
+            //ToTable("Locations", "baga");
+            Map(m =>
+                {
+                    m.Properties(d => new { d.Name, d.Country, d.Description });
+                    m.ToTable("Locations");
+                });
+            Map(m =>
+                {
+                    m.Properties(d => new { d.Photo });
+                    m.ToTable("LocationPhotos");
+                });
 
         }
     }
