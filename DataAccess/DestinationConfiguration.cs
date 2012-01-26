@@ -15,9 +15,7 @@ namespace DataAccess
 
 
             // Relationships
-            HasMany(d => d.Lodgings)
-                .WithRequired()
-                .HasForeignKey(l => l.LocationId);
+
 
         }
     }
