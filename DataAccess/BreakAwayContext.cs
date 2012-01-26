@@ -32,6 +32,11 @@ namespace DataAccess
                 .HasRequired(s => s.Accomodation)
                 .WithMany(l => l.InternetSpecials)
                 .HasForeignKey(s => s.AccomodationId);
+
+            modelBuilder.Entity<PersonPhoto>()
+                .HasRequired(p => p.PhotoOf)
+                .WithOptional(p => p.Photo);
+
         }
 
 
