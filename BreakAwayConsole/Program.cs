@@ -16,7 +16,23 @@ namespace BreakAwayConsole
             Database.SetInitializer(
                 new DropCreateDatabaseIfModelChanges<BreakAwayContext>());
 
-            Database.DefaultConnectionFactory = new CustomConnectionFactory();
+            // Database.DefaultConnectionFactory = new CustomConnectionFactory();
+
+            using (var context = new BreakAwayContext())
+            {
+                try
+                {
+                    context.Database.Initialize(force: false);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Initialization Failed...");
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            
+                
+
 
             InsertDestination();
             InsertTrip();
