@@ -15,6 +15,9 @@ namespace BreakAwayConsole
         {
             Database.SetInitializer(
                 new DropCreateDatabaseIfModelChanges<BreakAwayContext>());
+
+            Database.DefaultConnectionFactory = new CustomConnectionFactory();
+
             InsertDestination();
             InsertTrip();
             InsertPerson();
