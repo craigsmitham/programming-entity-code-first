@@ -14,26 +14,7 @@ namespace BreakAwayConsole
         static void Main(string[] args)
         {
             Database.SetInitializer(
-                new PromptForDropCreateDatabaseWhenModelChanges<BreakAwayContext>());
-
-            // Database.DefaultConnectionFactory = new CustomConnectionFactory();
-
-
-            InsertDestination();
-            InsertTrip();
-            InsertPerson();
-            UpdateTrip();
-            UpdatePerson();
-            ShowPerson();
-            // DeleteDestinationInMemoryAndDbCascade();
-            InsertActivities();
-            QueryTripWithActivities();
-            InsertLodging();
-            InsertResort();
-            InsertHostel();
-            GetAllLodgings();
-            // SpecifyDatabaseName();
-            ReUseDbConnection();
+                new DropCreateDatabaseAlways<BreakAwayContext>());
 
             
         }
