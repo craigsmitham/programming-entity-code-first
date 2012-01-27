@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Model;
 using DataAccess;
+using System.Data.SqlClient;
 using System.Data.Entity;
 
 namespace BreakAwayConsole
@@ -26,8 +27,34 @@ namespace BreakAwayConsole
             InsertLodging();
             InsertResort();
             InsertHostel();
-            SpecifyDatabaseName();
             GetAllLodgings();
+            // SpecifyDatabaseName();
+            ReUseDbConnection();
+            
+        }
+
+        private static void ReUseDbConnection()
+        {
+            var cstr = @"Server=.\SQLEXPRESS;
+                        Database=BreakAwayDbConnectionConstructor;
+                        Trusted_Connection=true";
+
+            using (var connection = new SqlConnection(cstr))
+            {
+                using (var context = new BreakAwayContext(connection))
+                {
+                    context.Destinations.Add(new Destination { Name = "Hawaii" });
+                    context.SaveChanges();
+                }
+
+                using (var context = new BreakAwayContext(connection))
+                {
+                    foreach (var destination in context.Destinations)
+                    {
+                        Console.WriteLine(destination.Name);
+                    }
+                }
+            }
         }
 
         private static void SpecifyDatabaseName()

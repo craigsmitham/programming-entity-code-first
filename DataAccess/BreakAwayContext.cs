@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Common;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,17 +10,22 @@ namespace DataAccess
 {
     public class BreakAwayContext : DbContext
     {
-        public BreakAwayContext() { }
-        public BreakAwayContext(string databaseName)
-            : base(databaseName) { }
+        public BreakAwayContext()
+        { }
 
+        public BreakAwayContext(string databaseName)
+            : base(databaseName)
+        { }
+
+        public BreakAwayContext(DbConnection connection)
+            : base(connection, contextOwnsConnection: false)
+        { }
 
 
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Lodging> Lodgings { get; set; }
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Person> People { get; set; }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -34,8 +40,8 @@ namespace DataAccess
             // Add Complex type configuration classes
             modelBuilder.Configurations.Add(new AddressConfiguration());
             modelBuilder.Configurations.Add(new PersonalInfoConfiguration());
-           
-      
+
+
             // In-line Entity configuration           
             modelBuilder.Entity<InternetSpecial>()
                 .HasRequired(s => s.Accomodation)
