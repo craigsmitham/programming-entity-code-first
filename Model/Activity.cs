@@ -7,6 +7,7 @@ namespace Model
 
         public int ActivityId { get; set; }
         public string Name { get; set; }
+        public string description { get; set; }
 
         public List<Trip> Trips { get; set; }
     }
