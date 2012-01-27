@@ -23,7 +23,49 @@ namespace BreakAwayConsole
             // DeleteDestinationInMemoryAndDbCascade();
             InsertActivities();
             QueryTripWithActivities();
+            InsertLodging();
+            InsertResort();
             Console.ReadKey();
+        }
+
+        private static void InsertResort()
+        {
+            var resort = new Resort
+            {
+                Name = "Top Notch Resort and Spa",
+                MilesFromNearestAirport = 30,
+                Activities = "Spa, Hiking, Skiing, Ballooning",
+                Destination = new Destination
+                {
+                    Name = "Stowe, Vermont",
+                    Country = "USA"
+                }
+            };
+
+            using (var context = new BreakAwayContext())
+            {
+                context.Lodgings.Add(resort);
+                context.SaveChanges();
+            }                
+        }
+
+        private static void InsertLodging()
+        {
+            var lodging = new Lodging
+            {
+                Name = "Rainy Day Motel",
+                Destination = new Destination
+                {
+                    Name = "Seattle, Washington",
+                    Country = "USA"
+                }
+            };
+
+            using (var context = new BreakAwayContext())
+            {
+                context.Lodgings.Add(lodging);
+                context.SaveChanges();
+            }
         }
 
    
