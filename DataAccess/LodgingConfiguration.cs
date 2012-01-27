@@ -9,6 +9,9 @@ namespace DataAccess
         {
             Property(l => l.Name).IsRequired().HasMaxLength(200);
             Property(l => l.MilesFromNearestAirport).HasPrecision(8, 1);
+            // Changing the column name of a foreign key:
+            Property(l => l.DestinationId).HasColumnName("destination_id");
+
 
             // Relationships
             HasOptional(l => l.PrimaryContact)
