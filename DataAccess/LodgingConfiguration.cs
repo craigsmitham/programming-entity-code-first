@@ -26,7 +26,7 @@ namespace DataAccess
 
             Map(m =>
                 {
-                    m.ToTable("Lodgings");
+                    // m.ToTable("Lodgings");
                     //m.Requires("IsResort").HasValue(false);
                 })
                 .Map<Resort>(m =>
