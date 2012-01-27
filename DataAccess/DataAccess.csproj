@@ -49,6 +49,7 @@
     <Compile Include="AddressConfiguration.cs" />
     <Compile Include="BreakAwayContext.cs" />
     <Compile Include="CustomConnectionFactory.cs" />
+    <Compile Include="DropCreateBreakAwayWithSeedData.cs" />
     <Compile Include="PersonPhotoConfiguration.cs" />
     <Compile Include="DestinationConfiguration.cs" />
     <Compile Include="LodgingConfiguration.cs" />

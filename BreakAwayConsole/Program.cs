@@ -13,10 +13,31 @@ namespace BreakAwayConsole
     {
         static void Main(string[] args)
         {
-            Database.SetInitializer(
-                new DropCreateDatabaseAlways<BreakAwayContext>());
+            Database.SetInitializer(new DropCreateBreakAwayWithSeedData());
+            GreatBarrierReefTest();
+            Console.ReadKey();
+        }
 
-            
+        private static void GreatBarrierReefTest()
+        {
+            using (var context = new BreakAwayContext())
+            {
+                var reef = from destination in context.Destinations
+                           where destination.Name == "Great Barrier Reef"
+                           select destination;
+
+                if (reef.Count() == 1)
+                {
+                    Console.WriteLine(
+                        "Test Passed: 1 'Great Barrier Reef' destination found");
+                }
+                else
+                {
+                    Console.WriteLine(
+                        "Test Failed: {0} 'Great Barrier Reef' destinations found",
+                        context.Destinations.Count());
+                }
+            }
         }
 
         private static void ReUseDbConnection()
