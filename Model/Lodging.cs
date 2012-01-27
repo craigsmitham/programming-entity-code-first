@@ -11,7 +11,7 @@ namespace Model
         // public bool IsResort { get; set; }
         public decimal MilesFromNearestAirport { get; set; }
 
-        public int DestinationId { get; set; }
+        // public int DestinationId { get; set; }
         public Destination Destination { get; set; }
 
         public List<InternetSpecial> InternetSpecials { get; set; }

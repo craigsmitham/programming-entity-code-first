@@ -126,7 +126,7 @@ namespace BreakAwayConsole
                     .Include("Activities").FirstOrDefault();
             }
         }
-
+#if false
         private static void DeleteDestinationInMemoryAndDbCascade()
         {
             int destinationId;
@@ -164,7 +164,7 @@ namespace BreakAwayConsole
                 Console.WriteLine("Lodgings: {0}", lodgings.Count);
             }
         }
-
+#endif
         private static void ShowPerson()
         {
             using (var context = new BreakAwayContext())
