@@ -26,7 +26,18 @@ namespace BreakAwayConsole
             InsertLodging();
             InsertResort();
             InsertHostel();
+            SpecifyDatabaseName();
             GetAllLodgings();
+        }
+
+        private static void SpecifyDatabaseName()
+        {
+            using (var context =
+                new BreakAwayContext("BreakAwayStringConstructor"))
+            {
+                context.Destinations.Add(new Destination { Name = "Tasmania" });
+                context.SaveChanges();
+            }
         }
 
         private static void GetAllLodgings()
