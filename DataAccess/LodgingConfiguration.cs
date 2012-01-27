@@ -20,6 +20,16 @@ namespace DataAccess
             HasRequired(l => l.Destination)
                 .WithMany(d => d.Lodgings)
                 .WillCascadeOnDelete(false);
+
+            Map(m =>
+                {
+                    m.ToTable("Lodgings");
+                    m.Requires("IsResort").HasValue(false);
+                })
+                .Map<Resort>(m =>
+                    {
+                        m.Requires("IsResort").HasValue(true);
+                    });
         }
     }
 }
