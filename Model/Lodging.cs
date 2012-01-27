@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Model
 {
-    abstract public class Lodging
+    public class Lodging
     {
         public int LodgingId { get; set; }
         public string Name { get; set; }

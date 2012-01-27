@@ -23,10 +23,44 @@ namespace BreakAwayConsole
             // DeleteDestinationInMemoryAndDbCascade();
             InsertActivities();
             QueryTripWithActivities();
-            // InsertLodging();
+            InsertLodging();
             InsertResort();
+            InsertHostel();
+            GetAllLodgings();
+        }
+
+        private static void GetAllLodgings()
+        {
+            var context = new BreakAwayContext();
+            var lodgings = context.Lodgings.ToList();
+            foreach (var lodging in lodgings)
+            {
+                Console.WriteLine("Name: {0}    Type: {1}",
+                    lodging.Name, lodging.GetType().ToString());
+            }
             Console.ReadKey();
         }
+
+        private static void InsertHostel()
+        {
+            var hostel = new Hostel
+            {
+                Name = "AAA Budget Youth Hostel",
+                MilesFromNearestAirport = 25,
+                PrivateRoomsAvailable = false,
+                Destination = new Destination
+                {
+                    Name = "Hanksfille, Vermont",
+                    Country = "USA"
+                }
+            };
+            using (var context = new BreakAwayContext())
+            {
+                context.Lodgings.Add(hostel);
+                context.SaveChanges();
+            }
+        }
+
 
         private static void InsertResort()
         {
@@ -46,10 +80,10 @@ namespace BreakAwayConsole
             {
                 context.Lodgings.Add(resort);
                 context.SaveChanges();
-            }                
+            }
         }
 
-#if false
+
         private static void InsertLodging()
         {
             var lodging = new Lodging
@@ -68,8 +102,7 @@ namespace BreakAwayConsole
                 context.SaveChanges();
             }
         }
-#endif
-   
+
 
         private static void InsertActivities()
         {
@@ -94,7 +127,6 @@ namespace BreakAwayConsole
             }
         }
 
-#if false
         private static void DeleteDestinationInMemoryAndDbCascade()
         {
             int destinationId;
@@ -132,7 +164,7 @@ namespace BreakAwayConsole
                 Console.WriteLine("Lodgings: {0}", lodgings.Count);
             }
         }
-#endif
+
         private static void ShowPerson()
         {
             using (var context = new BreakAwayContext())
