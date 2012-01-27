@@ -21,14 +21,18 @@ namespace DataAccess
                 .WithMany(d => d.Lodgings)
                 .WillCascadeOnDelete(false);
 
+            
+
+
             Map(m =>
                 {
                     m.ToTable("Lodgings");
-                    m.Requires("IsResort").HasValue(false);
+                    //m.Requires("IsResort").HasValue(false);
                 })
                 .Map<Resort>(m =>
                     {
-                        m.Requires("IsResort").HasValue(true);
+                        //m.Requires("IsResort").HasValue(true);
+                        m.ToTable("Resorts");
                     });
         }
     }
