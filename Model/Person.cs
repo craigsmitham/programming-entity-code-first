@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Model
 {
@@ -17,9 +18,10 @@ namespace Model
         public List<Reservation> Reservations { get; set; }
         
 
+        // This will not be mapped to the database by EF because it has no setter
         public string FullName
         {
-            get { return FirstName + " " + LastName; }
+            get { return String.Format("{0} {1}", FirstName.Trim(), LastName.Trim()); }
         }
         
 
