@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Model
 {
-    public class Lodging
+    abstract public class Lodging
     {
         public int LodgingId { get; set; }
         public string Name { get; set; }
@@ -26,6 +26,12 @@ namespace Model
     {
         public string Entertainment { get; set; }
         public string Activities { get; set; }
+    }
+
+    public class Hostel : Lodging
+    {
+        public int MaxPersonsPerRoom { get; set; }
+        public bool PrivateRoomsAvailable { get; set; }
     }
 
 }

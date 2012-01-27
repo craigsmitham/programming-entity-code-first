@@ -12,31 +12,15 @@ namespace DataAccess
 
             // Relationships
             HasOptional(l => l.PrimaryContact)
-                .WithMany(p => p.PrimaryContactFor)
-                .HasForeignKey(p => p.PrimaryContactId);
+                .WithMany(p => p.PrimaryContactFor);
 
             HasOptional(l => l.SecondaryContact)
-                .WithMany(p => p.SecondaryContactFor)
-                .HasForeignKey(p => p.SecondaryContactId);
+                .WithMany(p => p.SecondaryContactFor);
 
             HasRequired(l => l.Destination)
                 .WithMany(d => d.Lodgings)
                 .WillCascadeOnDelete(false);
 
-
-
-
-            Map(m =>
-                {
-                    m.ToTable("Lodgings");
-                    //m.Requires("IsResort").HasValue(false);
-                })
-                .Map<Resort>(m =>
-                    {
-                        //m.Requires("IsResort").HasValue(true);
-                        m.ToTable("Resorts");
-                        m.MapInheritedProperties();
-                    });
         }
     }
 }

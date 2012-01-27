@@ -23,7 +23,7 @@ namespace BreakAwayConsole
             // DeleteDestinationInMemoryAndDbCascade();
             InsertActivities();
             QueryTripWithActivities();
-            InsertLodging();
+            // InsertLodging();
             InsertResort();
             Console.ReadKey();
         }
@@ -49,6 +49,7 @@ namespace BreakAwayConsole
             }                
         }
 
+#if false
         private static void InsertLodging()
         {
             var lodging = new Lodging
@@ -67,7 +68,7 @@ namespace BreakAwayConsole
                 context.SaveChanges();
             }
         }
-
+#endif
    
 
         private static void InsertActivities()
@@ -93,6 +94,7 @@ namespace BreakAwayConsole
             }
         }
 
+#if false
         private static void DeleteDestinationInMemoryAndDbCascade()
         {
             int destinationId;
@@ -130,7 +132,7 @@ namespace BreakAwayConsole
                 Console.WriteLine("Lodgings: {0}", lodgings.Count);
             }
         }
-
+#endif
         private static void ShowPerson()
         {
             using (var context = new BreakAwayContext())
