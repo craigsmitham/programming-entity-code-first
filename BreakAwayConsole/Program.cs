@@ -14,7 +14,7 @@ namespace BreakAwayConsole
         static void Main(string[] args)
         {
             Database.SetInitializer(
-                new DropCreateDatabaseAlways<BreakAwayContext>());
+                new DropCreateDatabaseIfModelChanges<BreakAwayContext>());
 
             // Database.DefaultConnectionFactory = new CustomConnectionFactory();
 
@@ -34,6 +34,7 @@ namespace BreakAwayConsole
             GetAllLodgings();
             // SpecifyDatabaseName();
             ReUseDbConnection();
+
             
         }
 
