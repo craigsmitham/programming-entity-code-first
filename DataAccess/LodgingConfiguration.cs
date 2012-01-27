@@ -9,30 +9,33 @@ namespace DataAccess
         {
             Property(l => l.Name).IsRequired().HasMaxLength(200);
             Property(l => l.MilesFromNearestAirport).HasPrecision(8, 1);
-            
+
             // Relationships
             HasOptional(l => l.PrimaryContact)
-                .WithMany(p => p.PrimaryContactFor);
+                .WithMany(p => p.PrimaryContactFor)
+                .HasForeignKey(p => p.PrimaryContactId);
 
             HasOptional(l => l.SecondaryContact)
-                .WithMany(p => p.SecondaryContactFor);
+                .WithMany(p => p.SecondaryContactFor)
+                .HasForeignKey(p => p.SecondaryContactId);
 
             HasRequired(l => l.Destination)
                 .WithMany(d => d.Lodgings)
                 .WillCascadeOnDelete(false);
 
-            
+
 
 
             Map(m =>
                 {
-                    // m.ToTable("Lodgings");
+                    m.ToTable("Lodgings");
                     //m.Requires("IsResort").HasValue(false);
                 })
                 .Map<Resort>(m =>
                     {
                         //m.Requires("IsResort").HasValue(true);
                         m.ToTable("Resorts");
+                        m.MapInheritedProperties();
                     });
         }
     }
