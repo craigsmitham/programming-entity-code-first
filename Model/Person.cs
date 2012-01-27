@@ -14,7 +14,7 @@ namespace Model
         public List<Lodging> PrimaryContactFor { get; set; }
         public List<Lodging> SecondaryContactFor { get; set; }
         public PersonPhoto Photo { get; set; }
-
+        public List<Reservation> Reservations { get; set; }
         
 
         public string FullName

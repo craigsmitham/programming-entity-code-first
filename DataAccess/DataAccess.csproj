@@ -54,6 +54,7 @@
     <Compile Include="PersonalInfoConfiguration.cs" />
     <Compile Include="PersonConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReservationConfiguration.cs" />
     <Compile Include="TripConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>

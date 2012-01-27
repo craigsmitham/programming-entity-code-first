@@ -14,6 +14,7 @@ namespace DataAccess
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Person> People { get; set; }
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Add Entity type configuration classes
@@ -22,6 +23,7 @@ namespace DataAccess
             modelBuilder.Configurations.Add(new TripConfiguration());
             modelBuilder.Configurations.Add(new PersonConfiguration());
             modelBuilder.Configurations.Add(new PersonPhotoConfiguration());
+            modelBuilder.Configurations.Add(new ReservationConfiguration());
 
             // Add Complex type configuration classes
             modelBuilder.Configurations.Add(new AddressConfiguration());
