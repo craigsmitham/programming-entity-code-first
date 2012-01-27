@@ -14,7 +14,8 @@ namespace DataAccess
             Property(d => d.Name)
                 .IsRequired()
                 .HasColumnName("LocationName");
-            Property(d => d.Description).HasMaxLength(500);
+            // Testing new database initializer
+            Property(d => d.Description).HasMaxLength(499);
             Property(d => d.Photo).HasColumnType("image");
 
 

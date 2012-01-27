@@ -9,6 +9,8 @@ namespace Model
         public string Country { get; set; }
         public string Description { get; set; }
         public byte[] Photo { get; set; }
+        public string TravelWarnings { get; set; }
+        public string ClimateInfo { get; set; }
 
         public List<Lodging> Lodgings { get; set; }
     }
