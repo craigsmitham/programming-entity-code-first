@@ -13,8 +13,8 @@ namespace BreakAwayConsole
     {
         static void Main(string[] args)
         {
-            //Database.SetInitializer(
-            //    new DropCreateDatabaseIfModelChanges<BreakAwayContext>());
+            Database.SetInitializer(
+                new DropCreateDatabaseAlways<BreakAwayContext>());
 
             // Database.DefaultConnectionFactory = new CustomConnectionFactory();
 
